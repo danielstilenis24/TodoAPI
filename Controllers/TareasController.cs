@@ -31,21 +31,14 @@ public class TareasController : ControllerBase
         return Ok(tarea);
     }
 
+
     [HttpPost]
-    public IActionResult AgregarTarea([FromBody] Tarea tareaInsertada)
+    public IActionResult AgregarTarea(Tarea tareaInsertada)
     {
-        Tarea encontrada;
-        tareaInsertada.TryGetValue(tareaInsertada.Id, out encontrada);
-        if(encontrada == null)
-        {
-            tareaInsertada.Add(tareaInsertada.Id, tareaInsertada)
-            return Ok(tareaInsertada);
-        }else
-        {
-            return NotFound();
-        }
+        tareas.Add(tareaInsertada);
+
+        return Ok(tareaInsertada);
     }
-    
 
     [HttpPut("{id}")]
     public IActionResult ActualizarTarea(int id, Tarea tareaActualizada)
